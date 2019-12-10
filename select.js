@@ -10,7 +10,7 @@ var con = mysql.createConnection({
 con.connect((err) => {
     if (err) throw err;
     console.log("Connected!");
-    sql = "select * from running_equipment";
+    sql = "select * from running_equipment ";
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log(result);
