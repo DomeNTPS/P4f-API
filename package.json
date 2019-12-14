@@ -1,17 +1,18 @@
 {
-  "name": "p4f-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "restapi",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "dayjs": "^1.8.17",
-    "express": "^4.17.1",
-    "mysql": "^2.17.1",
-    "nodemon": "^2.0.1"
+    "axios": "^0.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mysql": "^2.17.1"
   }
 }
