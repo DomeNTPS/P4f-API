@@ -10,8 +10,9 @@ router.get('/:id', function (req, res, next) {
     const {
         id
     } = req.params
+    var password = 123456789
     console.log(id, req.params)
-    var sql = `SELECT ID,Passwords,Position FROM employee WHERE ID="${id}"`;
+    var sql = `SELECT Position,KKS1_factory FROM employee WHERE IDEmp="${id}" AND Password="${password}"`;
     db.query(sql, function (err, rows, fields) {
         if (err) {
             res.status(500).send({
@@ -19,7 +20,7 @@ router.get('/:id', function (req, res, next) {
             })
         }
         console.log(rows, fields)
-        res.json(rows)
+         res.json(rows[0])
     })
 });
 

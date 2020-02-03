@@ -1,0 +1,12 @@
+version: '3'
+services:
+  p4f-api:
+    image: p4f:1.0
+    ports: 
+      - "5000:5000"
+    container_name: 'p4f-Container'
+    restart: always
+    networks: 
+      - p4f
+networks: 
+  p4f:

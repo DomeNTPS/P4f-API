@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var running_equipmentRouter = require('./routes/running_equipment');
 var employee = require('./routes/employee');
+const port = 5000
 
 
 var app = express();
@@ -26,7 +27,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/running_equipment', running_equipmentRouter);
 app.use('/employee',employee);
-
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
