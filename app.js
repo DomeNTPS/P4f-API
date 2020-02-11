@@ -8,7 +8,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var running_equipmentRouter = require('./routes/running_equipment');
 var employee = require('./routes/employee');
-const port = 5000
+var updatewithdraw = require('./routes/updatewithdraw');
+var insertwithdraw = require('./routes/insertwithdraw');
+
+const port = 3000
 
 
 var app = express();
@@ -27,6 +30,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/running_equipment', running_equipmentRouter);
 app.use('/employee',employee);
+app.use('/updatewithdraw',updatewithdraw);
+app.use('/insertwithdraw',insertwithdraw);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

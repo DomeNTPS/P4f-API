@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "devStart": "nodemon app.js",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -13,7 +14,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql": "^2.17.1"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

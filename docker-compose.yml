@@ -8,5 +8,24 @@ services:
     restart: always
     networks: 
       - p4f
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks: 
+      - p4f
+
+  db:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Chalermwut13
+    networks: 
+      - p4f
+      
 networks: 
   p4f:
