@@ -10,8 +10,8 @@ var running_equipmentRouter = require('./routes/running_equipment');
 var employee = require('./routes/employee');
 var updatewithdraw = require('./routes/updatewithdraw');
 var insertwithdraw = require('./routes/insertwithdraw');
-
-const port = 3000
+var cors = require('cors');
+const port = 5000
 
 
 var app = express();
@@ -20,6 +20,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
