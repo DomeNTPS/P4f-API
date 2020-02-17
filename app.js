@@ -11,9 +11,8 @@ var employee = require('./routes/employee');
 var updatewithdraw = require('./routes/updatewithdraw');
 var insertwithdraw = require('./routes/insertwithdraw');
 var cors = require('cors');
-const port = 5000
 
-
+const port = 5000;
 var app = express();
 
 // view engine setup
