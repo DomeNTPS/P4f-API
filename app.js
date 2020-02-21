@@ -10,6 +10,7 @@ var running_equipmentRouter = require('./routes/running_equipment');
 var employee = require('./routes/employee');
 var updatewithdraw = require('./routes/updatewithdraw');
 var insertwithdraw = require('./routes/insertwithdraw');
+var equip_table = require('./routes/equip_table');
 var cors = require('cors');
 
 const port = 5000;
@@ -25,26 +26,29 @@ app.use(cors({
 }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/running_equipment', running_equipmentRouter);
-app.use('/employee',employee);
-app.use('/updatewithdraw',updatewithdraw);
-app.use('/insertwithdraw',insertwithdraw);
+app.use('/employee', employee);
+app.use('/updatewithdraw', updatewithdraw);
+app.use('/insertwithdraw', insertwithdraw);
+app.use('/equip_table', equip_table);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
