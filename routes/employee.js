@@ -2,7 +2,11 @@ var express = require("express")
 var router = express.Router()
 var db = require("../db")
 var bodyParser = require("body-parser")
+
+
+
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 // import passport and passport-jwt modules
 const passport = require('passport')
 const passportJWT = require('passport-jwt')
@@ -18,6 +22,7 @@ jwtOptions.secretOrKey = 'wowwow'
 
 router.use(passport.initialize())
 router.use(bodyParser.json())
+router.use(cookieParser());
 
 router.post("/",async function(req, res, next) {
   try {
@@ -63,6 +68,7 @@ router.post("/",async function(req, res, next) {
 
   router.post("/web",async function(req, res, next) {
     try {
+      console.log(req.cookies)
     const { ID, Pass } = req.body
       var sql = `SELECT * FROM employee WHERE IDEmp="${ID}"`
       await db.query(sql, function(err, rows, fields) {
@@ -86,8 +92,11 @@ router.post("/",async function(req, res, next) {
                   // only personalized value that goes into our token
                   let payload = { ID : userInfo.IDEmp }
                   let token = jwt.sign(payload, jwtOptions.secretOrKey)
-                  res.send({ token: token, user : userInfo.NameEmp,KKS1 :userInfo.KKS1_factory ,defaultAnimationDialog: false })
-                  return
+                  return res.cookie(`access_token`, `Bearer ${token}`,{
+                    expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+                  , httpOnly: true}).send({ 
+                    // token: token,
+                     user : userInfo.NameEmp,KKS1 :userInfo.KKS1_factory})
                 }else{
                   console.log("3")
                   res.status(401).json({ defaultAnimationDialog: true })
@@ -112,7 +121,10 @@ router.post("/",async function(req, res, next) {
         }
   
     })
-
+    router.get('/clear_cookie', function(req, res){
+      res.clearCookie('access_token');
+      res.send('cookie access_token cleared');
+   });
 /* GET users listing. */
 // router.post("/", function(req, res, next) {
 //   console.log(req.body)
