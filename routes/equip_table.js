@@ -12,7 +12,7 @@ router.get('/:kkscode', function (req, res, next) {
     } = req.params
     console.log(kkscode, req.params)
     var sql = `SELECT running_equip.KKS,running_equip.KKS1,equipment.NameEquip,running_equip.KKS4,running_equip.DateStart,running_equip.DateExpired
-,equipment.KKS4,equipment.Lift_time,inventory.KKS4,inventory.KKS1,inventory.CountStock
+,equipment.KKS4,equipment.Life_time,inventory.KKS4,inventory.KKS1,inventory.CountStock
     FROM running_equip,equipment,inventory 
     WHERE running_equip.KKS1 = "${kkscode}"
     AND running_equip.KKS4 = equipment.KKS4
