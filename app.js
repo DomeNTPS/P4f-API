@@ -22,7 +22,7 @@ app.set('view engine', 'hbs');
 
 app.use(cors({
   credentials:true,
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000',
 }));
 app.use(logger('dev'));
 app.use(express.json());
