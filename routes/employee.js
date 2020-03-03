@@ -94,7 +94,7 @@ router.post("/",async function(req, res, next) {
                   let token = jwt.sign(payload, jwtOptions.secretOrKey)
                   return res.cookie(`access_token`, `Bearer ${token}`,{
                     expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
-                  , httpOnly: true}).send({ 
+                  }).send({ 
                     // token: token,
                      user : userInfo.NameEmp,KKS1 :userInfo.KKS1_factory})
                 }else{
