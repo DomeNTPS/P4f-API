@@ -92,7 +92,7 @@ router.post("/",async function(req, res, next) {
                   // only personalized value that goes into our token
                   let payload = { ID : userInfo.IDEmp }
                   let token = jwt.sign(payload, jwtOptions.secretOrKey)
-                  return res.cookie(`access_token`, `Bearer ${token}`,{
+                  return res.cookie(`access_token`, `${token}`,{
                     expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
                   }).send({ 
                     // token: token,
