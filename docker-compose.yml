@@ -18,7 +18,7 @@ services:
       - p4f
 
   db:
-    image: mysql:latest
+    image: mysql:5.6
     ports:
       - 3306:3306
     restart: always
