@@ -68,8 +68,7 @@ router.post("/",async function(req, res, next) {
 
   router.post("/web",async function(req, res, next) {
     try {
-      console.log(req.cookies)
-    const { ID, Pass } = req.body
+      const { ID, Pass } = req.body
       var sql = `SELECT * FROM employee WHERE IDEmp="${ID}"`
       await db.query(sql, function(err, rows, fields) {
             if (err) {
@@ -78,25 +77,20 @@ router.post("/",async function(req, res, next) {
             console.log(rows[0])
             let userInfo = rows[0]
             if (ID && Pass) {
-              // console.log("-----",userInfo)
               if (!userInfo) {
                 console.log("1")
-       
                 res.status(401).json({ defaultAnimationDialog: true })
                 return
               }
               if (userInfo.Password === Pass) {
                 console.log("2")
                 if(userInfo.Position == "Admin"){
-                  // from now on we'll identify the user by the id and the id is the 
-                  // only personalized value that goes into our token
                   let payload = { ID : userInfo.IDEmp }
                   let token = jwt.sign(payload, jwtOptions.secretOrKey)
-                  return res.cookie(`access_token`, `${token}`,{
-                    expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
-                  }).send({ 
-                    // token: token,
-                     user : userInfo.NameEmp,KKS1 :userInfo.KKS1_factory})
+                  return res.send({ 
+                    token: token,
+                    user : userInfo.NameEmp,
+                    KKS1 :userInfo.KKS1_factory})
                 }else{
                   console.log("3")
                   res.status(401).json({ defaultAnimationDialog: true })
@@ -121,9 +115,5 @@ router.post("/",async function(req, res, next) {
         }
   
     })
-    router.get('/clear_cookie', function(req, res){
-      res.clearCookie('access_token');
-      res.send('cookie access_token cleared');
-   });
 
 module.exports = router
