@@ -32,7 +32,7 @@ router.post('/user', function (req, res, next) {
                 error: 'Something failed!'
             })
         }
-        console.log(rows, fields)
+        // console.log(rows, fields)
         res.send(rows[0])
     })
 });
@@ -56,7 +56,7 @@ router.get('/:kks1', function (req, res, next) {
                 error: 'Something failed!'
             })
         }
-        console.log(rows, fields)
+        // console.log(rows, fields)
         res.json(rows)
     })
 });

@@ -10,7 +10,7 @@ router.get('/:datetime', function (req, res, next) {
     const {
         datetime
     } = req.params
-    console.log(datetime, req.params)
+    console.log(req.params)
     var sql = `SELECT NameEmp,LastNameEmp,NameEquip,employee.IDEmp,KKS_Equip_Withdraw,Date_withdraw,Count_withdraw
     FROM employee,equipment,running_equip,withdraw
     WHERE Date_withdraw BETWEEN "${datetime}-01" AND "${datetime}-31"
