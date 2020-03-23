@@ -12,6 +12,7 @@ var updatewithdraw = require('./routes/updatewithdraw');
 var insertwithdraw = require('./routes/insertwithdraw');
 var equip_table = require('./routes/equip_table');
 var selectwithdraw = require('./routes/selectwithdraw');
+var insertaddinven = require('./routes/insertaddinven');
 var cors = require('cors');
 
 const port = 5000;
@@ -40,6 +41,7 @@ app.use('/updatewithdraw', updatewithdraw);
 app.use('/insertwithdraw', insertwithdraw);
 app.use('/equip_table', equip_table);
 app.use('/selectwithdraw', selectwithdraw);
+app.use('/insertaddinven', insertaddinven);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
