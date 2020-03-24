@@ -28,19 +28,47 @@ router.post('/', function (req, res, next) {
     //  console.log(req.body.Count_withdraw)
     //  console.log(req.body.Date_Withdraw)
     //  var sql = `INSERT INTO withdraw(IDEmp,KKS4_Equip_Withdraw,Count_withdraw,Date_Withdraw) VALUES('1379900073717', 'AA',' 1','2020-02-07')`;
-
-     var sql = `INSERT INTO withdraw(IDEmp,KKS_Equip_Withdraw,KKS4_Equip_Withdraw,KKS1_Factory_withdraw,Count_withdraw,Date_Withdraw) VALUES('${IDEmp.ID}','${req.body.KKS_Equip_Withdraw}','${req.body.KKS4_Equip_Withdraw}','${req.body.KKS1_Factory_withdraw}', '${req.body.Count_withdraw}','${req.body.Date_Withdraw}')`;
-    db.query(sql, function (err, rows, fields) {
-        if (err) {
-            res.status(500).send({
-               err : console.error()
-                
-            })
+    // var check = `SELECT * FROM withdraw WHERE IDEmp = '1409800338149'AND KKS1 = '10'AND KKS4 = 'AA'`
+    var check = `SELECT * FROM withdraw WHERE IDEmp = '${IDEmp.ID}'AND KKS1 = '${req.body.KKS1_Factory_withdraw}'AND KKS4 = '${req.body.KKS4_Equip_Withdraw}'`
+    db.query(check, function (err, rows, fields){
+        if(rows[0]===undefined){
+            var sql = `INSERT INTO withdraw(IDEmp,KKS1,KKS4,Count_withdraw) VALUES('${IDEmp.ID}','${req.body.KKS1_Factory_withdraw}','${req.body.KKS4_Equip_Withdraw}', '${req.body.Count_withdraw}')`;
+            db.query(sql, function (err, rows, fields) {
+                if (err) {
+                    res.status(500).send({
+                    err : console.error()
+                })
         }
         // console.log(rows, fields)
         res.send({
-            suscess: "good"
+            suscess: "create"
         })
+    })
+        }else{
+            var sql = `UPDATE inventory SET Count_withdraw = '${req.body.Count_withdraw}' WHERE IDEmp = '${IDEmp.ID}'AND KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
+            db.query(sql, function (err, rows, fields) {
+                if (err) {
+                    res.status(500).send({
+                    err : console.error()
+                })
+            res.send({
+                suscess: "update"
+            })
+        }
+    })
+    // var sql = `INSERT INTO withdraw(IDEmp,KKS1,KKS4,Count_withdraw,Date_Withdraw) VALUES('${IDEmp.ID}','${req.body.KKS1_Equip_Withdraw}','${req.body.KKS4_Factory_withdraw}', '${req.body.Count_withdraw}','${req.body.Date_Withdraw}')`;
+    // db.query(sql, function (err, rows, fields) {
+    //     if (err) {
+    //         res.status(500).send({
+    //            err : console.error()
+                
+    //         })
+    //     }
+    //     // console.log(rows, fields)
+    //     res.send({
+    //         suscess: "good"
+    //     })
+    }
     })
 });
 
