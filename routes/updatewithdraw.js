@@ -11,8 +11,7 @@ router.post('/', function (req, res, next) {
     // console.log(req.body.CountStock)
     // console.log(req.body.KKS4)
     // console.log(req.body.KKS1)
-    // var sql = `UPDATE inventory SET CountStock = '80' WHERE KKS4 = 'AA' AND KKS1 = '10'`;
-    var sql = `UPDATE inventory SET CountStock = '${req.body.CountStock}' WHERE KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
+    var sql = `UPDATE withdraw SET Count_withdraw = '${req.body.Countwithdraw}' WHERE KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}' AND IDEMP='${req.body.IDEmp}'`;
     db.query(sql, function (err, rows, fields) {
         if (err) {
             res.status(500).send({
