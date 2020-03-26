@@ -13,7 +13,7 @@ var insertwithdraw = require('./routes/insertwithdraw');
 var equip_table = require('./routes/equip_table');
 var selectlog = require('./routes/selectlog');
 var insertlog = require('./routes/insertlog');
-var insertinventory = require('./routes/insertinventory');
+var updateinventory = require('./routes/updateinventory');
 var cors = require('cors');
 
 const port = 5000;
@@ -43,8 +43,7 @@ app.use('/insertwithdraw', insertwithdraw);
 app.use('/equip_table', equip_table);
 app.use('/selectlog', selectlog);
 app.use('/insertlog', insertlog);
-app.use('/insertinventory', insertinventory);
-// app.use('/insertinventory',insertinventory);
+app.use('/updateinventory', updateinventory);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
