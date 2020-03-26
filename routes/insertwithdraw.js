@@ -56,18 +56,6 @@ router.post('/', function (req, res, next) {
             })
         }
     })
-    // var sql = `INSERT INTO withdraw(IDEmp,KKS1,KKS4,Count_withdraw,Date_Withdraw) VALUES('${IDEmp.ID}','${req.body.KKS1_Equip_Withdraw}','${req.body.KKS4_Factory_withdraw}', '${req.body.Count_withdraw}','${req.body.Date_Withdraw}')`;
-    // db.query(sql, function (err, rows, fields) {
-    //     if (err) {
-    //         res.status(500).send({
-    //            err : console.error()
-                
-    //         })
-    //     }
-    //     // console.log(rows, fields)
-    //     res.send({
-    //         suscess: "good"
-    //     })
     }
     })
 });

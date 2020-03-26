@@ -33,7 +33,7 @@ router.post('/user', function (req, res, next) {
             })
         }
         // console.log(rows, fields)
-        res.send(rows[0])
+        res.send(rows)
     })
 });
 

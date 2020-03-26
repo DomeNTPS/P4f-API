@@ -20,9 +20,7 @@ router.get('/:datetime', function (req, res, next) {
     // WHERE Date_withdraw = "${datetime}-01"`;
     db.query(sql, function (err, rows, fields) {
         if (err) {
-            res.status(500).send({
-                error: 'Something failed!'
-            })
+            res.send(rows)
         }
         console.log(rows)
         res.json(rows)
