@@ -45,7 +45,9 @@ router.post('/', function (req, res, next) {
         })
     })
         }else{
-            var sql = `UPDATE inventory SET Count_withdraw = '${rows[0].Count_withdraw+req.body.Count_withdraw}' WHERE IDEmp = '${IDEmp.ID}'AND KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
+            let Count_withdrawNew = rows[0].Count_withdraw + req.body.Count_withdraw
+            console.log(Count_withdrawNew)
+            var sql = `UPDATE withdraw SET Count_withdraw = '${Count_withdrawNew}' WHERE IDEmp = '${IDEmp.ID}'AND KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
             db.query(sql, function (err, rows, fields) {
                 if (err) {
                     res.status(500).send({
