@@ -53,10 +53,10 @@ router.post('/', function (req, res, next) {
                     res.status(500).send({
                     err : console.error()
                 })
-            res.send({
-                suscess: "update"
-            })
         }
+        res.send({
+            suscess: "update"
+        })
     })
     }
     })
