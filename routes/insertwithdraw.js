@@ -62,4 +62,38 @@ router.post('/', function (req, res, next) {
     })
 });
 
+router.post('/web', function (req, res, next) {
+
+    var check = `SELECT * FROM withdraw WHERE IDEmp = '${req.body.IDEmp}'AND KKS1 = '${req.body.KKS1}'AND KKS4 = '${req.body.KKS4}'`
+    db.query(check, function (err, rows, fields){
+        if(rows[0]===undefined){
+            var sql = `INSERT INTO withdraw(IDEmp,KKS1,KKS4,Count_withdraw) VALUES('${req.body.IDEmp}','${req.body.KKS1}','${req.body.KKS4}', '${req.body.Count_withdraw}')`;
+            db.query(sql, function (err, rows, fields) {
+                if (err) {
+                    res.status(500).send({
+                    err : console.error()
+                })
+        }
+        // console.log(rows, fields)
+        res.send({
+            suscess: "create"
+        })
+    })
+        }else{
+            let Count_withdrawNew = rows[0].Count_withdraw + req.body.Count_withdraw
+            console.log(Count_withdrawNew)
+            var sql = `UPDATE withdraw SET Count_withdraw = '${Count_withdrawNew}' WHERE IDEmp = '${req.body.IDEmp}'AND KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
+            db.query(sql, function (err, rows, fields) {
+                if (err) {
+                    res.status(500).send({
+                    err : console.error()
+                })
+        }
+        res.send({
+            suscess: "update"
+        })
+    })
+    }
+    })
+});
 module.exports = router;

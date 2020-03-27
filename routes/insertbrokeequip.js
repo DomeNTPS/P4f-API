@@ -45,16 +45,19 @@ router.post('/', function (req, res, next) {
         })
     })
         }else{
-            var sql = `UPDATE broke_equipment SET CountBroke = '${req.body.CountBroke}' WHERE KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
+            let Count_Broke = rows[0].CountBroke + req.body.CountBroke
+            var sql = `UPDATE broke_equipment SET CountBroke = '${Count_Broke}' WHERE KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`;
             db.query(sql, function (err, rows, fields) {
                 if (err) {
                     res.status(500).send({
                     err : console.error()
                 })
+            }
+
             res.send({
                 suscess: "update"
             })
-        }
+        
     })
     }
     })

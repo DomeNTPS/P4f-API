@@ -15,6 +15,7 @@ var selectlog = require('./routes/selectlog');
 var insertlog = require('./routes/insertlog');
 var updateinventory = require('./routes/updateinventory');
 var insertbrokeequip = require('./routes/insertbrokeequip');
+var returnwithdraw = require('./routes/returnwithdraw');
 var cors = require('cors');
 
 const port = 5000;
@@ -46,6 +47,7 @@ app.use('/selectlog', selectlog);
 app.use('/insertlog', insertlog);
 app.use('/updateinventory', updateinventory);
 app.use('/insertbrokeequip', insertbrokeequip);
+app.use('/returnwithdraw', returnwithdraw);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
