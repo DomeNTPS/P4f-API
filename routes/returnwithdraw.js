@@ -23,9 +23,12 @@ jwtOptions.secretOrKey = 'wowwow'
 router.use(passport.initialize())
 router.use(bodyParser.json())
 router.use(cookieParser());
-router.get("/allID",async function(req, res, next) {
-    
-    var sql = `SELECT IDEmp FROM employee`;
+router.get("/allID/:KKS1",async function(req, res, next) {
+    const {
+        KKS1
+      } = req.params
+      console.log(req.params)
+    var sql = `SELECT IDEmp FROM employee WHERE KKS1_factory = '${KKS1}'`;
     db.query(sql, function (err, rows, fields) {
         if (err) {
             res.send(rows)
