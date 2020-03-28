@@ -45,7 +45,7 @@ router.get('/:kks1', function (req, res, next) {
     } = req.params
     console.log(kks1, req.params)
     var sql = `SELECT running_equip.KKS,equipment.NameEquip,running_equip.DateStart,running_equip.DateExpired
-,equipment.KKS4,equipment.Life_time,inventory.KKS4,inventory.KKS1,inventory.CountStock
+,equipment.KKS4,equipment.Life_time,inventory.KKS4,inventory.KKS1,inventory.CountStock,running_equip.QRCode
     FROM running_equip,equipment,inventory 
     WHERE running_equip.KKS1 = "${kks1}"
     AND running_equip.KKS4 = equipment.KKS4
