@@ -60,4 +60,20 @@ router.get('/:kks1', function (req, res, next) {
         res.json(rows)
     })
 });
+router.get('/allEquipName/:KKS1', function (req, res, next) {
+    const {
+        KKS1
+    } = req.params
+    console.log(req.params)
+    var sql = `SELECT NameEquip
+  FROM inventory,equipment
+  WHERE inventory.KKS1 = "${KKS1}" AND inventory.KKS4 = equipment.KKS4 `;
+    db.query(sql, function (err, rows, fields) {
+        if (err) {
+            res.send(rows)
+        }
+        console.log(rows)
+        res.json(rows)
+    })
+})
 module.exports = router;
