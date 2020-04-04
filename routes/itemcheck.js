@@ -26,11 +26,28 @@ router.get('/:token', function (req, res, next) {
             WHERE IDEmp = "${IDEmp.ID}"
             AND inventory.KKS1 = employee.KKS1_factory AND inventory.KKS4 = equipment.KKS4`;
     db.query(sql, function (err, rows, fields) {
-          if (err) {st:5000/
+          if (err) {
                     res.send(rows)
                 }
             console.log(rows)
             res.json(rows)
            }) 
+        });
+router.get('/withdraw/:token', function (req, res, next) {
+
+    const {token} = req.params
+    console.log(req.params)
+    let IDEmp = jwt.decode(token)
+    console.log(IDEmp.ID)
+    var sql = `SELECT NameEquip,Count_withdraw FROM equipment,withdraw
+    WHERE withdraw.IDEmp = "${IDEmp.ID}"
+    AND withdraw.KKS4 = equipment.KKS4 `;
+    db.query(sql, function (err, rows, fields) {
+        if (err) {
+                res.send(rows)
+                }
+                console.log(rows)
+                res.json(rows)
+            })
         });
 module.exports = router;
