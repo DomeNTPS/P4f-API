@@ -20,6 +20,7 @@ var setreturnwithdraw = require('./routes/setreturnwithdraw');
 var itemcheck = require('./routes/itemcheck');
 var addinventory = require('./routes/addinventory');
 var returnwithdraw = require('./routes/returnwithdraw');
+var changeRunningEquip = require('./routes/changeRunningEquip');
 var cors = require('cors');
 
 const port = 5000;
@@ -56,6 +57,7 @@ app.use('/itemcheck', itemcheck);
 app.use('/addinventory', addinventory);
 app.use('/setreturnwithdraw', setreturnwithdraw);
 app.use('/returnwithdraw',returnwithdraw);
+app.use('/changeRunningEquip', changeRunningEquip);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
