@@ -104,8 +104,7 @@ router.post('/updaterunning', function (req, res, next) {
                         // })
                     })
                 }
-                
-            // })
+            })
             // var INSERTloginventoryUse = `INSERT INTO loginventory(IDEmp,Process,KKSCode,KKS1,KKS4,CountLog,DateLog) VALUES('${IDEmp.ID}','ChangeEquipment','${req.body.KKS}','${rows[0].KKS1}','${rows[0].KKS4}',1,'${req.body.DateStart}')`;
             // db.query(INSERTloginventoryUse, function (err, rows, fields) {
             //     if (err) {
