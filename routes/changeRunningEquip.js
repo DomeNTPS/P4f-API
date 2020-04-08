@@ -73,8 +73,8 @@ router.post('/updaterunning', function (req, res, next) {
         } else {
             let now = dayjs().format('YYYY-MM-DD HH:mm:ss')
             let DateExpried = dayjs(now).add((rows[0].Life_time), 'd').format('YYYY-MM-DD HH:mm:ss')
-            // console.log(now)
-            // console.log(DateExprie);
+            console.log(now)
+            console.log(DateExpried);
             var updateRunningEquip = `UPDATE running_equip SET DateStart = '${now}', DateExpired = '${DateExpried}' WHERE KKS = '${req.body.KKS}'`;
             db.query(updateRunningEquip, function (err, rows, fields) {
                 if (err) {
@@ -89,31 +89,33 @@ router.post('/updaterunning', function (req, res, next) {
                     res.status(500).send({
                         err2: console.error()
                     })
+                    console.log("dont found")
                 }else{
+                    console.log(rows2[0].Count_withdraw)
                     let withdrawupdate = rows2[0].Count_withdraw - 1
-                    var updatewithdraw = `UPDATE withdraw SET Count_withdraw = '${withdrawupdate}' WHERE IDEmp = '${IDEmp.ID}'AND KKS4 = '${rows2[0].KKS4}' AND KKS1 = '${rows2[0].KKS1}'`;
+                    var updatewithdraw = `UPDATE withdraw SET Count_withdraw = '${withdrawupdate}' WHERE IDEmp = '${IDEmp.ID}'AND KKS4 = '${rows[0].KKS4}' AND KKS1 = '${rows[0].KKS1}'`;
                     db.query(updatewithdraw, function (err, rows, fields) {
                     if (err) {
                         res.status(500).send({
                             err: console.error()
                             })
                         }
-                        // console.log(rows, fields)
-                        // res.send({
-                        //     suscess: "suscess"
-                        // })
+                       
                     })
                 }
             })
-            // var INSERTloginventoryUse = `INSERT INTO loginventory(IDEmp,Process,KKSCode,KKS1,KKS4,CountLog,DateLog) VALUES('${IDEmp.ID}','ChangeEquipment','${req.body.KKS}','${rows[0].KKS1}','${rows[0].KKS4}',1,'${req.body.DateStart}')`;
-            // db.query(INSERTloginventoryUse, function (err, rows, fields) {
-            //     if (err) {
-            //         res.status(500).send({
-            //             err: console.error()
+            var INSERTloginventoryUse = `INSERT INTO loginventory(IDEmp,Process,KKSCode,KKS1,KKS4,CountLog,DateLog) VALUES('${IDEmp.ID}','ChangeEquipment','${req.body.KKS}','${rows[0].KKS1}','${rows[0].KKS4}',1,'${now}')`;
+            db.query(INSERTloginventoryUse, function (err, rows, fields) {
+                if (err) {
+                    res.status(500).send({
+                        err: console.error()
 
-            //         })
-            //     }
-            // })
+                    })
+                }
+                res.send({
+                    suscess: "suscess"
+                })
+            })
         }
     })
 })
