@@ -20,17 +20,17 @@ router.post('/', function (req, res, next) {
     // console.log(req.body)
     let token = req.body.token
     let IDEmp = jwt.decode(token)
-    //  console.log(req.body)
-    //  console.log("-------------------------------------------------------")
+    var insertlog = `INSERT INTO loginventory(IDEmp,Process,KKS1,KKS4,CountLog,DateLog) VALUES('${IDEmp.ID}','${req.body.Process}','${req.body.KKS1}','${req.body.KKS4}','${req.body.Count_withdraw}','${req.body.Datelog}')`;
+    db.query(insertlog, function (err, rows, fields) {
+        if (err) {
+            res.status(500).send({
+                err: console.error()
 
-    
-    //  console.log(req.body.KKS4_Equip_Withdraw)
-    //  console.log(req.body.Count_withdraw)
-    //  console.log(req.body.Date_Withdraw)
-    //  var sql = `INSERT INTO withdraw(IDEmp,KKS4_Equip_Withdraw,Count_withdraw,Date_Withdraw) VALUES('1379900073717', 'AA',' 1','2020-02-07')`;
-    // var check = `SELECT * FROM withdraw WHERE IDEmp = '1409800338149'AND KKS1 = '10'AND KKS4 = 'AA'`
-    var check = `SELECT * FROM withdraw WHERE IDEmp = '${IDEmp.ID}'AND KKS1 = '${req.body.KKS1}'AND KKS4 = '${req.body.KKS4}'`
-    db.query(check, function (err, rows, fields){
+            })
+        }
+    })
+    var checkwithdraw = `SELECT * FROM withdraw WHERE IDEmp = '${IDEmp.ID}'AND KKS1 = '${req.body.KKS1}'AND KKS4 = '${req.body.KKS4}'`
+    db.query(checkwithdraw, function (err, rows,fields){
         if(rows[0]===undefined){
             var sql = `INSERT INTO withdraw(IDEmp,KKS1,KKS4,Count_withdraw) VALUES('${IDEmp.ID}','${req.body.KKS1}','${req.body.KKS4}', '${req.body.Count_withdraw}')`;
             db.query(sql, function (err, rows, fields) {
@@ -59,6 +59,16 @@ router.post('/', function (req, res, next) {
         })
     })
     }
+    })
+    var sql = `UPDATE inventory SET CountStock = '${req.body.CountStock}' WHERE KKS4 = '${req.body.KKS4}' AND KKS1 = '${req.body.KKS1}'`
+    db.query(sql, function (err, rows, fields) {
+        if (err) {
+            res.status(500).send({
+                err: console.error()
+            })
+        }
+        // console.log(rows)
+        // res.send(rows)
     })
 });
 
