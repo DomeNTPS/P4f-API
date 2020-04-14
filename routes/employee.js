@@ -72,14 +72,14 @@ router.post("/",async function(req, res, next) {
       var sql = `SELECT * FROM employee WHERE IDEmp="${ID}"`
       await db.query(sql, function(err, rows, fields) {
             if (err) {
-              res.status(500).send({ defaultAnimationDialog: true })
+              res.status(500).send(true)
             }
             console.log(rows[0])
             let userInfo = rows[0]
             if (ID && Pass) {
               if (!userInfo) {
                 console.log("1")
-                res.status(401).json({ defaultAnimationDialog: true })
+                res.status(401).json(true)
                 return
               }
               if (userInfo.Password === Pass) {
@@ -93,25 +93,25 @@ router.post("/",async function(req, res, next) {
                     KKS1 :userInfo.KKS1_factory})
                 }else{
                   console.log("3")
-                  res.status(401).json({ defaultAnimationDialog: true })
+                  res.status(401).json(true)
                   return
                 }
               } else {
                 console.log("4")
-                res.status(401).json({ defaultAnimationDialog: true })
+                res.status(401).json(true)
                 return
               }
             }
             else{
               console.log(ID)
               console.log("5")
-              res.status(401).json({ defaultAnimationDialog: true })
+              res.status(401).json(true)
               return
             }
           })
         } catch (err) {
           console.log('err:',err)
-          res.status(401).json({ defaultAnimationDialog: true })
+          res.status(401).json(true)
         }
   
     })
